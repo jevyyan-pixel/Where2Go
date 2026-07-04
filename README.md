@@ -33,6 +33,10 @@ xcodebuild -project Where2Go.xcodeproj -scheme Where2Go -destination 'platform=i
 xcodebuild -project Where2Go.xcodeproj -scheme Where2Go -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.5' test
 ```
 
+## Git 管理规范
+
+后续开发遵循 [Where2Go Git 管理规范](docs/GIT_WORKFLOW.md)：`main` 保持稳定，大功能使用功能分支，push 前运行测试，稳定阶段使用 tag 标记版本。
+
 ## V0.1 暂不包含
 
 - 地图预览与地点搜索
