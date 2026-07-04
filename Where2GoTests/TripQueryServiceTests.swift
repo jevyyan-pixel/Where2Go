@@ -2,6 +2,41 @@ import XCTest
 @testable import Where2Go
 
 final class TripQueryServiceTests: XCTestCase {
+    func testSportCategoryIsAvailableForExercisePlans() {
+        XCTAssertTrue(TripCategory.allCases.contains(.sport))
+        XCTAssertEqual(TripCategory.sport.title, "运动")
+        XCTAssertEqual(TripCategory.sport.symbolName, "figure.run")
+    }
+
+    func testRelativeDayTextUsesTodayTomorrowThenConcreteDate() throws {
+        let calendar = Calendar(identifier: .gregorian)
+        let now = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 4, hour: 9)))
+        let today = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 4, hour: 20)))
+        let tomorrow = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 5, hour: 10)))
+        let later = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 8, hour: 10)))
+
+        XCTAssertEqual(TripQueryService.relativeDayText(for: today, now: now, calendar: calendar), "今天")
+        XCTAssertEqual(TripQueryService.relativeDayText(for: tomorrow, now: now, calendar: calendar), "明天")
+        XCTAssertTrue(TripQueryService.relativeDayText(for: later, now: now, calendar: calendar).contains("7月8日"))
+    }
+
+    func testSummaryUsesAssistantToneForTomorrowTrips() throws {
+        let calendar = Calendar(identifier: .gregorian)
+        let now = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 4, hour: 9)))
+        let gymTime = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 5, hour: 18, minute: 30)))
+        let trips = [
+            TripItem(title: "力量训练", startAt: gymTime, category: .sport, locationName: "社区健身房", isReservation: true),
+        ]
+
+        let summary = TripQueryService.summary(for: gymTime, trips: trips, now: now, calendar: calendar)
+
+        XCTAssertTrue(summary.contains("明天有 1 个安排"))
+        XCTAssertTrue(summary.contains("18:30"))
+        XCTAssertTrue(summary.contains("社区健身房"))
+        XCTAssertTrue(summary.contains("力量训练"))
+        XCTAssertTrue(summary.contains("建议"))
+    }
+
     func testReminderOffsetComputesFifteenMinutesBeforeStart() throws {
         let calendar = Calendar(identifier: .gregorian)
         let start = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 4, hour: 13, minute: 0)))
@@ -28,7 +63,7 @@ final class TripQueryServiceTests: XCTestCase {
         XCTAssertTrue(calendar.isDate(referenceDate, inSameDayAs: now))
     }
 
-    func testGroupedByDaySortsDaysDescendingAndTripsAscending() throws {
+    func testGroupedByDaySortsDaysAscendingAndTripsAscending() throws {
         let calendar = Calendar(identifier: .gregorian)
         let firstDayMorning = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 4, hour: 9, minute: 0)))
         let firstDayEvening = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 4, hour: 19, minute: 0)))
@@ -42,8 +77,9 @@ final class TripQueryServiceTests: XCTestCase {
         let grouped = TripQueryService.groupedByDay(trips, calendar: calendar)
 
         XCTAssertEqual(grouped.count, 2)
-        XCTAssertTrue(calendar.isDate(grouped[0].date, inSameDayAs: secondDayNoon))
-        XCTAssertEqual(grouped[1].trips.map(\.title), ["早餐", "晚餐"])
+        XCTAssertTrue(calendar.isDate(grouped[0].date, inSameDayAs: firstDayMorning))
+        XCTAssertTrue(calendar.isDate(grouped[1].date, inSameDayAs: secondDayNoon))
+        XCTAssertEqual(grouped[0].trips.map(\.title), ["早餐", "晚餐"])
     }
 
     func testNotificationSummaryIncludesTodayTrips() throws {

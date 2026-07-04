@@ -106,6 +106,9 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("设置")
+            .scrollContentBackground(.hidden)
+            .background(DesignTokens.softBackground)
+            .tint(DesignTokens.accent)
             .task {
                 refreshNotificationState()
             }

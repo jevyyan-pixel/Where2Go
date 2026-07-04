@@ -23,8 +23,9 @@ struct NextTripView: View {
                         summaryCard(for: referenceDate)
 
                         VStack(alignment: .leading, spacing: DesignTokens.rowSpacing) {
-                            Text(Calendar.current.isDateInToday(referenceDate) ? "今天剩余安排" : "最近一天安排")
+                            Text(TripQueryService.relativeDayText(for: referenceDate))
                                 .font(.headline)
+                                .foregroundStyle(.primary)
 
                             ForEach(visibleTrips) { trip in
                                 NavigationLink {
@@ -38,7 +39,7 @@ struct NextTripView: View {
                     } else {
                         EmptyStateView(
                             title: "最近还没有计划",
-                            message: "给周末、晚餐、展览或学习安排一个时间，Where2Go 会帮你整理成清楚的行程摘要。",
+                            message: "想去哪里、什么时候出发，先记下来。Where2Go 会帮你整理成清楚的行程 Briefing。",
                             systemImage: "calendar.badge.plus",
                             actionTitle: "新增行程"
                         ) {
@@ -67,8 +68,12 @@ struct NextTripView: View {
 
     private func summaryCard(for date: Date) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label(Calendar.current.isDateInToday(date) ? "今天去哪玩" : date.formatted(.dateTime.month().day().weekday(.wide)), systemImage: "sparkles")
+            Label("行程 Briefing", systemImage: "sparkles")
                 .font(.subheadline.weight(.semibold))
+                .foregroundStyle(DesignTokens.gold)
+
+            Text(TripQueryService.relativeDayText(for: date))
+                .font(.callout.weight(.semibold))
                 .foregroundStyle(DesignTokens.accent)
 
             Text(TripQueryService.summary(for: date, trips: trips))
@@ -78,6 +83,6 @@ struct NextTripView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(18)
-        .background(DesignTokens.cardBackground, in: RoundedRectangle(cornerRadius: DesignTokens.cardRadius, style: .continuous))
+        .conciergeCardStyle()
     }
 }

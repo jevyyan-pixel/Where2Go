@@ -34,7 +34,20 @@ enum TripQueryService {
 
         return groups
             .map { (date: $0.key, trips: $0.value.sorted { $0.startAt < $1.startAt }) }
-            .sorted { $0.date > $1.date }
+            .sorted { $0.date < $1.date }
+    }
+
+    static func relativeDayText(for date: Date, now: Date = Date(), calendar: Calendar = .current) -> String {
+        if calendar.isDate(date, inSameDayAs: now) {
+            return "今天"
+        }
+
+        if let tomorrow = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: now)),
+           calendar.isDate(date, inSameDayAs: tomorrow) {
+            return "明天"
+        }
+
+        return date.formatted(.dateTime.month().day().weekday(.wide))
     }
 
     static func summary(for date: Date, trips: [TripItem], now: Date = Date(), calendar: Calendar = .current) -> String {
@@ -43,8 +56,7 @@ enum TripQueryService {
             return "最近还没有计划，要不要安排一个小行程？"
         }
 
-        let dateText = date.formatted(.dateTime.month().day().weekday(.wide))
-        let prefix = calendar.isDateInToday(date) ? "今天" : "\(dateText)"
+        let prefix = relativeDayText(for: date, now: now, calendar: calendar)
         let descriptions = dayTrips.prefix(4).map { trip in
             let time = trip.startAt.formatted(.dateTime.hour().minute())
             if trip.locationName.isEmpty {
@@ -54,7 +66,7 @@ enum TripQueryService {
         }
 
         let extra = dayTrips.count > descriptions.count ? "，还有 \(dayTrips.count - descriptions.count) 个安排" : ""
-        return "\(prefix)有 \(dayTrips.count) 个安排：\(descriptions.joined(separator: "，"))\(extra)。请提前做好准备哦。"
+        return "\(prefix)有 \(dayTrips.count) 个安排：\(descriptions.joined(separator: "，"))\(extra)。建议提前确认交通时间，并整理好所需资料。"
     }
 
     static func notificationSummary(for date: Date, trips: [TripItem], calendar: Calendar = .current) -> String {

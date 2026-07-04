@@ -7,12 +7,12 @@ struct TripRowView: View {
         HStack(alignment: .top, spacing: 12) {
             ZStack {
                 Circle()
-                    .fill(trip.category.tint.opacity(0.16))
+                    .fill(trip.category.tint.opacity(DesignTokens.iconBackgroundOpacity))
                 Image(systemName: trip.category.symbolName)
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundStyle(trip.category.tint)
             }
-            .frame(width: 38, height: 38)
+            .frame(width: 42, height: 42)
 
             VStack(alignment: .leading, spacing: 5) {
                 HStack(alignment: .firstTextBaseline) {
@@ -29,24 +29,34 @@ struct TripRowView: View {
                     Spacer(minLength: 0)
                 }
 
-                HStack(spacing: 8) {
+                HStack(spacing: 7) {
                     Text(trip.category.title)
+                        .foregroundStyle(trip.category.tint)
                     if !trip.locationName.isEmpty {
                         Label(trip.locationName, systemImage: "mappin.and.ellipse")
                             .labelStyle(.titleAndIcon)
                     }
+                    Spacer(minLength: 0)
                     if trip.isReservation {
-                        Label("已预约", systemImage: "checkmark.seal.fill")
-                            .labelStyle(.titleAndIcon)
+                        HStack(spacing: 4) {
+                            Image(systemName: "checkmark.seal.fill")
+                                .font(.caption2)
+                            Text("已预约")
+                        }
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(DesignTokens.accent)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(DesignTokens.capsuleBackground, in: Capsule())
                     }
                 }
                 .font(.footnote)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(DesignTokens.subduedText)
                 .lineLimit(1)
             }
         }
-        .padding(14)
-        .background(DesignTokens.cardBackground, in: RoundedRectangle(cornerRadius: DesignTokens.cardRadius, style: .continuous))
+        .padding(15)
+        .conciergeCardStyle()
         .accessibilityElement(children: .combine)
     }
 }

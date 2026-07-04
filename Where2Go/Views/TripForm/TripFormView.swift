@@ -17,6 +17,10 @@ struct TripFormView: View {
     @State private var notes = ""
     @State private var saveError: String?
     private let editingTrip: TripItem?
+    private let categoryColumns = [
+        GridItem(.flexible(), spacing: 10),
+        GridItem(.flexible(), spacing: 10),
+    ]
 
     init(defaultDate: Date) {
         self.defaultDate = defaultDate
@@ -51,12 +55,7 @@ struct TripFormView: View {
 
                     DatePicker("时间", selection: $startAt, displayedComponents: [.date, .hourAndMinute])
 
-                    Picker("类型", selection: $category) {
-                        ForEach(TripCategory.allCases) { category in
-                            Label(category.title, systemImage: category.symbolName)
-                                .tag(category)
-                        }
-                    }
+                    categorySelector
                 }
 
                 Section("地点与预约") {
@@ -88,6 +87,9 @@ struct TripFormView: View {
             }
             .navigationTitle(isEditing ? "编辑行程" : "新增行程")
             .navigationBarTitleDisplayMode(.inline)
+            .scrollContentBackground(.hidden)
+            .background(DesignTokens.softBackground)
+            .tint(DesignTokens.accent)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("取消") {
@@ -108,6 +110,50 @@ struct TripFormView: View {
                 }
             }
         }
+    }
+
+    private var categorySelector: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("类型")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(DesignTokens.subduedText)
+
+            LazyVGrid(columns: categoryColumns, spacing: 10) {
+                ForEach(TripCategory.allCases) { item in
+                    Button {
+                        category = item
+                    } label: {
+                        HStack(spacing: 9) {
+                            ZStack {
+                                Circle()
+                                    .fill(item.tint.opacity(category == item ? 0.22 : DesignTokens.iconBackgroundOpacity))
+                                Image(systemName: item.symbolName)
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(item.tint)
+                            }
+                            .frame(width: 30, height: 30)
+
+                            Text(item.title)
+                                .font(.subheadline.weight(.semibold))
+                                .foregroundStyle(.primary)
+
+                            Spacer(minLength: 0)
+                        }
+                        .frame(minHeight: 44)
+                        .padding(.horizontal, 10)
+                        .background(category == item ? item.tint.opacity(0.12) : DesignTokens.elevatedBackground, in: RoundedRectangle(cornerRadius: DesignTokens.controlRadius, style: .continuous))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: DesignTokens.controlRadius, style: .continuous)
+                                .stroke(category == item ? item.tint.opacity(0.6) : DesignTokens.cardBorder, lineWidth: 1)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(item.title)
+                    .accessibilityValue(category == item ? "已选择" : "")
+                }
+            }
+        }
+        .padding(.vertical, 4)
     }
 
     private func saveTrip() {

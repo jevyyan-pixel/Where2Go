@@ -38,11 +38,17 @@ struct TripTimelineView: View {
                                     }
                                 }
                             } header: {
-                                Text(group.date.formatted(.dateTime.month().day().weekday(.wide)))
-                                    .font(.headline)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.vertical, 6)
-                                    .background(DesignTokens.softBackground)
+                                HStack(spacing: 8) {
+                                    Circle()
+                                        .fill(DesignTokens.gold)
+                                        .frame(width: 6, height: 6)
+                                    Text(TripQueryService.relativeDayText(for: group.date))
+                                        .font(.headline)
+                                        .foregroundStyle(DesignTokens.accent)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.vertical, 8)
+                                .background(DesignTokens.softBackground)
                             }
                         }
                     }

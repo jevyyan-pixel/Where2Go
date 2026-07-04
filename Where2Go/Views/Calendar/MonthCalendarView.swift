@@ -50,6 +50,7 @@ struct MonthCalendarView: View {
 
             Text(displayedMonth.formatted(.dateTime.year().month(.wide)))
                 .font(.title3.weight(.semibold))
+                .foregroundStyle(DesignTokens.accent)
 
             Spacer()
 
@@ -92,6 +93,7 @@ struct MonthCalendarView: View {
         return VStack(alignment: .leading, spacing: DesignTokens.rowSpacing) {
             Text(selectedDate.formatted(.dateTime.month().day().weekday(.wide)))
                 .font(.headline)
+                .foregroundStyle(DesignTokens.accent)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             if dayTrips.isEmpty {
@@ -118,9 +120,11 @@ struct MonthCalendarView: View {
 
     private func dayCell(_ date: Date) -> some View {
         let calendar = Calendar.current
-        let hasTrips = !TripQueryService.trips(on: date, from: trips).isEmpty
+        let dayTrips = TripQueryService.trips(on: date, from: trips)
+        let hasTrips = !dayTrips.isEmpty
         let isSelected = calendar.isDate(date, inSameDayAs: selectedDate)
         let isToday = calendar.isDateInToday(date)
+        let markerColor = dayTrips.first?.category.tint ?? DesignTokens.accent
 
         return Button {
             selectedDate = date
@@ -131,16 +135,19 @@ struct MonthCalendarView: View {
                     .foregroundStyle(isSelected ? .white : .primary)
 
                 Circle()
-                    .fill(hasTrips ? (isSelected ? .white : DesignTokens.accent) : .clear)
+                    .fill(hasTrips ? (isSelected ? DesignTokens.gold : markerColor) : .clear)
                     .frame(width: 5, height: 5)
             }
             .frame(maxWidth: .infinity)
             .frame(height: 46)
-            .background(isSelected ? DesignTokens.accent : DesignTokens.cardBackground, in: RoundedRectangle(cornerRadius: DesignTokens.cardRadius, style: .continuous))
+            .background(isSelected ? DesignTokens.accent : DesignTokens.cardBackground, in: RoundedRectangle(cornerRadius: DesignTokens.controlRadius, style: .continuous))
             .overlay {
                 if isToday && !isSelected {
-                    RoundedRectangle(cornerRadius: DesignTokens.cardRadius, style: .continuous)
-                        .stroke(DesignTokens.accent.opacity(0.5), lineWidth: 1)
+                    RoundedRectangle(cornerRadius: DesignTokens.controlRadius, style: .continuous)
+                        .stroke(DesignTokens.gold.opacity(0.75), lineWidth: 1)
+                } else if !isSelected {
+                    RoundedRectangle(cornerRadius: DesignTokens.controlRadius, style: .continuous)
+                        .stroke(DesignTokens.cardBorder, lineWidth: 1)
                 }
             }
         }

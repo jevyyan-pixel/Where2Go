@@ -25,7 +25,9 @@ struct EmptyStateView: View {
         VStack(spacing: 14) {
             Image(systemName: systemImage)
                 .font(.system(size: 34, weight: .semibold))
-                .foregroundStyle(DesignTokens.accent)
+                .foregroundStyle(DesignTokens.gold)
+                .frame(width: 64, height: 64)
+                .background(DesignTokens.gold.opacity(0.14), in: Circle())
                 .accessibilityHidden(true)
 
             VStack(spacing: 6) {
@@ -33,7 +35,7 @@ struct EmptyStateView: View {
                     .font(.headline)
                 Text(message)
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(DesignTokens.subduedText)
                     .multilineTextAlignment(.center)
             }
 
@@ -46,6 +48,6 @@ struct EmptyStateView: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 40)
         .padding(.horizontal, 22)
-        .background(DesignTokens.cardBackground, in: RoundedRectangle(cornerRadius: DesignTokens.cardRadius, style: .continuous))
+        .conciergeCardStyle()
     }
 }

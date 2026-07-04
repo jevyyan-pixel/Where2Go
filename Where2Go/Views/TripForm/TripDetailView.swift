@@ -32,6 +32,7 @@ struct TripDetailView: View {
                         .foregroundStyle(DesignTokens.accent)
                 }
                 .padding(.vertical, 8)
+                .listRowBackground(DesignTokens.cardBackground)
             }
 
             Section("地点与预约") {
@@ -60,6 +61,9 @@ struct TripDetailView: View {
         }
         .navigationTitle("行程详情")
         .navigationBarTitleDisplayMode(.inline)
+        .scrollContentBackground(.hidden)
+        .background(DesignTokens.softBackground)
+        .tint(DesignTokens.accent)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("编辑") {
