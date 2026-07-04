@@ -35,7 +35,14 @@ xcodebuild -project Where2Go.xcodeproj -scheme Where2Go -destination 'platform=i
 
 ## Git 管理规范
 
-后续开发遵循 [Where2Go Git 管理规范](docs/GIT_WORKFLOW.md)：`main` 保持稳定，大功能使用功能分支，push 前运行测试，稳定阶段使用 tag 标记版本。
+后续开发遵循 [Where2Go Git 管理规范](docs/workflow/git-workflow.md)：`main` 保持稳定，大功能使用功能分支，push 前运行测试，稳定阶段使用 tag 标记版本。
+
+## 文档目录
+
+- [V0.1 PRD + 技术开发手册](docs/product/where2go-v0.1-prd-tech-manual.docx)
+- [V0.1 开发计划](docs/product/where2go-v0.1-development-plan.md)
+- [原始开发手册](docs/product/original-development-manual.docx)
+- [Git 管理规范](docs/workflow/git-workflow.md)
 
 ## V0.1 暂不包含
 
