@@ -63,8 +63,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1A0000010000000000000501 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
-		1A0000010000000000000502 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		1A0000010000000000000501 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1A0000010000000000000502 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -115,7 +127,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		1A0000010000000000000605 /* ViewModels */ = {isa = PBXGroup; children = (); path = ViewModels; sourceTree = "<group>"; };
+		1A0000010000000000000605 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		1A0000010000000000000606 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,16 +144,89 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		1A0000010000000000000607 /* DesignSystem */ = {isa = PBXGroup; children = (1A0000010000000000000106 /* DesignTokens.swift */,); path = DesignSystem; sourceTree = "<group>"; };
-		1A0000010000000000000608 /* Resources */ = {isa = PBXGroup; children = (1A0000010000000000000116 /* Assets.xcassets */,); path = Resources; sourceTree = "<group>"; };
-		1A0000010000000000000609 /* Where2GoTests */ = {isa = PBXGroup; children = (1A0000010000000000000117 /* TripQueryServiceTests.swift */,); path = Where2GoTests; sourceTree = "<group>"; };
-		1A0000010000000000000610 /* Products */ = {isa = PBXGroup; children = (1A0000010000000000000401 /* Where2Go.app */, 1A0000010000000000000402 /* Where2GoTests.xctest */,); name = Products; sourceTree = "<group>"; };
-		1A0000010000000000000611 /* Components */ = {isa = PBXGroup; children = (1A0000010000000000000109 /* TripRowView.swift */, 1A0000010000000000000110 /* EmptyStateView.swift */,); path = Components; sourceTree = "<group>"; };
-		1A0000010000000000000612 /* NextTrip */ = {isa = PBXGroup; children = (1A0000010000000000000111 /* NextTripView.swift */,); path = NextTrip; sourceTree = "<group>"; };
-		1A0000010000000000000613 /* Calendar */ = {isa = PBXGroup; children = (1A0000010000000000000112 /* MonthCalendarView.swift */,); path = Calendar; sourceTree = "<group>"; };
-		1A0000010000000000000614 /* Timeline */ = {isa = PBXGroup; children = (1A0000010000000000000113 /* TimelineView.swift */,); path = Timeline; sourceTree = "<group>"; };
-		1A0000010000000000000615 /* Settings */ = {isa = PBXGroup; children = (1A0000010000000000000114 /* SettingsView.swift */,); path = Settings; sourceTree = "<group>"; };
-		1A0000010000000000000616 /* TripForm */ = {isa = PBXGroup; children = (1A0000010000000000000115 /* TripFormView.swift */, 1A0000010000000000000118 /* TripDetailView.swift */,); path = TripForm; sourceTree = "<group>"; };
+		1A0000010000000000000607 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				1A0000010000000000000106 /* DesignTokens.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		1A0000010000000000000608 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1A0000010000000000000116 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1A0000010000000000000609 /* Where2GoTests */ = {
+			isa = PBXGroup;
+			children = (
+				1A0000010000000000000117 /* TripQueryServiceTests.swift */,
+			);
+			path = Where2GoTests;
+			sourceTree = "<group>";
+		};
+		1A0000010000000000000610 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1A0000010000000000000401 /* Where2Go.app */,
+				1A0000010000000000000402 /* Where2GoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1A0000010000000000000611 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1A0000010000000000000109 /* TripRowView.swift */,
+				1A0000010000000000000110 /* EmptyStateView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		1A0000010000000000000612 /* NextTrip */ = {
+			isa = PBXGroup;
+			children = (
+				1A0000010000000000000111 /* NextTripView.swift */,
+			);
+			path = NextTrip;
+			sourceTree = "<group>";
+		};
+		1A0000010000000000000613 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				1A0000010000000000000112 /* MonthCalendarView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		1A0000010000000000000614 /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				1A0000010000000000000113 /* TimelineView.swift */,
+			);
+			path = Timeline;
+			sourceTree = "<group>";
+		};
+		1A0000010000000000000615 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				1A0000010000000000000114 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		1A0000010000000000000616 /* TripForm */ = {
+			isa = PBXGroup;
+			children = (
+				1A0000010000000000000115 /* TripFormView.swift */,
+				1A0000010000000000000118 /* TripDetailView.swift */,
+			);
+			path = TripForm;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,8 +238,10 @@
 				1A0000010000000000000501 /* Frameworks */,
 				1A0000010000000000000802 /* Resources */,
 			);
-			buildRules = ();
-			dependencies = ();
+			buildRules = (
+			);
+			dependencies = (
+			);
 			name = Where2Go;
 			productName = Where2Go;
 			productReference = 1A0000010000000000000401 /* Where2Go.app */;
@@ -162,7 +255,8 @@
 				1A0000010000000000000502 /* Frameworks */,
 				1A0000010000000000000804 /* Resources */,
 			);
-			buildRules = ();
+			buildRules = (
+			);
 			dependencies = (
 				1A0000010000000000000901 /* PBXTargetDependency */,
 			);
@@ -181,26 +275,51 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
-					1A0000010000000000000302 = {CreatedOnToolsVersion = 16.0;};
-					1A0000010000000000000303 = {CreatedOnToolsVersion = 16.0; TestTargetID = 1A0000010000000000000302;};
+					1A0000010000000000000302 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					1A0000010000000000000303 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 1A0000010000000000000302;
+					};
 				};
 			};
 			buildConfigurationList = 1A0000010000000000000703 /* Build configuration list for PBXProject "Where2Go" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = zh-Hans;
+			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
-			knownRegions = (zh-Hans, en, Base,);
+			knownRegions = (
+				"zh-Hans",
+				en,
+				Base,
+			);
 			mainGroup = 1A0000010000000000000601;
 			productRefGroup = 1A0000010000000000000610 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
-			targets = (1A0000010000000000000302 /* Where2Go */, 1A0000010000000000000303 /* Where2GoTests */,);
+			targets = (
+				1A0000010000000000000302 /* Where2Go */,
+				1A0000010000000000000303 /* Where2GoTests */,
+			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1A0000010000000000000802 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (1A0000010000000000000016 /* Assets.xcassets in Resources */,); runOnlyForDeploymentPostprocessing = 0; };
-		1A0000010000000000000804 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		1A0000010000000000000802 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A0000010000000000000016 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1A0000010000000000000804 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -228,11 +347,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A0000010000000000000803 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (1A0000010000000000000017 /* TripQueryServiceTests.swift in Sources */,); runOnlyForDeploymentPostprocessing = 0; };
+		1A0000010000000000000803 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A0000010000000000000017 /* TripQueryServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1A0000010000000000000901 /* PBXTargetDependency */ = {isa = PBXTargetDependency; target = 1A0000010000000000000302 /* Where2Go */; targetProxy = 1A0000010000000000000201 /* PBXContainerItemProxy */; };
+		1A0000010000000000000901 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1A0000010000000000000302 /* Where2Go */;
+			targetProxy = 1A0000010000000000000201 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -277,7 +407,10 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1", "$(inherited)");
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -358,6 +491,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = FKLB6TCJN9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Where2Go;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -368,7 +502,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.where2go.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jevyyan.where2go;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -383,6 +517,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FKLB6TCJN9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Where2Go;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -393,7 +528,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.where2go.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jevyyan.where2go;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -411,7 +546,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.where2go.app.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jevyyan.where2go.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_VERSION = 5.0;
@@ -429,7 +564,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.where2go.app.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jevyyan.where2go.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_VERSION = 5.0;
@@ -441,9 +576,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1A0000010000000000000701 /* Build configuration list for PBXNativeTarget "Where2Go" */ = {isa = XCConfigurationList; buildConfigurations = (1A0000010000000000001003 /* Debug */, 1A0000010000000000001004 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
-		1A0000010000000000000702 /* Build configuration list for PBXNativeTarget "Where2GoTests" */ = {isa = XCConfigurationList; buildConfigurations = (1A0000010000000000001005 /* Debug */, 1A0000010000000000001006 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
-		1A0000010000000000000703 /* Build configuration list for PBXProject "Where2Go" */ = {isa = XCConfigurationList; buildConfigurations = (1A0000010000000000001001 /* Debug */, 1A0000010000000000001002 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		1A0000010000000000000701 /* Build configuration list for PBXNativeTarget "Where2Go" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A0000010000000000001003 /* Debug */,
+				1A0000010000000000001004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1A0000010000000000000702 /* Build configuration list for PBXNativeTarget "Where2GoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A0000010000000000001005 /* Debug */,
+				1A0000010000000000001006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1A0000010000000000000703 /* Build configuration list for PBXProject "Where2Go" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A0000010000000000001001 /* Debug */,
+				1A0000010000000000001002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 	};
 	rootObject = 1A0000010000000000000301 /* Project object */;
