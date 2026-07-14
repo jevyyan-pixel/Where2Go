@@ -82,6 +82,42 @@ final class TripQueryServiceTests: XCTestCase {
         XCTAssertEqual(grouped[0].trips.map(\.title), ["早餐", "晚餐"])
     }
 
+    func testUpcomingTripsHidePastItemsByDefault() throws {
+        let calendar = Calendar(identifier: .gregorian)
+        let now = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 4, hour: 12, minute: 0)))
+        let morning = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 4, hour: 9, minute: 0)))
+        let afternoon = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 4, hour: 15, minute: 0)))
+        let tomorrow = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 5, hour: 10, minute: 0)))
+        let trips = [
+            TripItem(title: "下午咖啡", startAt: afternoon, category: .food),
+            TripItem(title: "已结束早餐", startAt: morning, category: .food),
+            TripItem(title: "明天展览", startAt: tomorrow, category: .play),
+        ]
+
+        let upcoming = TripQueryService.upcomingTrips(trips, now: now)
+
+        XCTAssertEqual(upcoming.map(\.title), ["下午咖啡", "明天展览"])
+    }
+
+    func testPastTripsSortMostRecentFirstForRefreshHistory() throws {
+        let calendar = Calendar(identifier: .gregorian)
+        let now = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 4, hour: 12, minute: 0)))
+        let yesterday = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 3, hour: 20, minute: 0)))
+        let morning = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 4, hour: 9, minute: 0)))
+        let afternoon = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 4, hour: 15, minute: 0)))
+        let trips = [
+            TripItem(title: "昨天晚餐", startAt: yesterday, category: .food),
+            TripItem(title: "已结束早餐", startAt: morning, category: .food),
+            TripItem(title: "下午咖啡", startAt: afternoon, category: .food),
+        ]
+
+        let past = TripQueryService.pastTrips(trips, now: now)
+        let grouped = TripQueryService.groupedPastByDay(past, calendar: calendar)
+
+        XCTAssertEqual(past.map(\.title), ["已结束早餐", "昨天晚餐"])
+        XCTAssertEqual(grouped.map { $0.trips.map(\.title) }, [["已结束早餐"], ["昨天晚餐"]])
+    }
+
     func testNotificationSummaryIncludesTodayTrips() throws {
         let calendar = Calendar(identifier: .gregorian)
         let date = try XCTUnwrap(calendar.date(from: DateComponents(year: 2026, month: 7, day: 4, hour: 8, minute: 0)))

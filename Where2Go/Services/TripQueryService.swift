@@ -37,6 +37,28 @@ enum TripQueryService {
             .sorted { $0.date < $1.date }
     }
 
+    static func upcomingTrips(_ trips: [TripItem], now: Date = Date()) -> [TripItem] {
+        trips
+            .filter { $0.startAt >= now }
+            .sorted { $0.startAt < $1.startAt }
+    }
+
+    static func pastTrips(_ trips: [TripItem], now: Date = Date()) -> [TripItem] {
+        trips
+            .filter { $0.startAt < now }
+            .sorted { $0.startAt > $1.startAt }
+    }
+
+    static func groupedPastByDay(_ trips: [TripItem], calendar: Calendar = .current) -> [(date: Date, trips: [TripItem])] {
+        let groups = Dictionary(grouping: trips) { trip in
+            calendar.startOfDay(for: trip.startAt)
+        }
+
+        return groups
+            .map { (date: $0.key, trips: $0.value.sorted { $0.startAt > $1.startAt }) }
+            .sorted { $0.date > $1.date }
+    }
+
     static func relativeDayText(for date: Date, now: Date = Date(), calendar: Calendar = .current) -> String {
         if calendar.isDate(date, inSameDayAs: now) {
             return "今天"

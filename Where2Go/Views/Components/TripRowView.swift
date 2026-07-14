@@ -2,15 +2,16 @@ import SwiftUI
 
 struct TripRowView: View {
     let trip: TripItem
+    var isPast: Bool = false
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             ZStack {
                 Circle()
-                    .fill(trip.category.tint.opacity(DesignTokens.iconBackgroundOpacity))
+                    .fill(iconBackground)
                 Image(systemName: trip.category.symbolName)
                     .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(trip.category.tint)
+                    .foregroundStyle(iconForeground)
             }
             .frame(width: 42, height: 42)
 
@@ -19,11 +20,11 @@ struct TripRowView: View {
                     Text(trip.startAt, format: .dateTime.hour().minute())
                         .font(.subheadline.weight(.semibold))
                         .monospacedDigit()
-                        .foregroundStyle(DesignTokens.accent)
+                        .foregroundStyle(timeColor)
 
                     Text(trip.title)
                         .font(.body.weight(.semibold))
-                        .foregroundStyle(.primary)
+                        .foregroundStyle(titleColor)
                         .lineLimit(2)
 
                     Spacer(minLength: 0)
@@ -31,7 +32,7 @@ struct TripRowView: View {
 
                 HStack(spacing: 7) {
                     Text(trip.category.title)
-                        .foregroundStyle(trip.category.tint)
+                        .foregroundStyle(iconForeground)
                     if !trip.locationName.isEmpty {
                         Label(trip.locationName, systemImage: "mappin.and.ellipse")
                             .labelStyle(.titleAndIcon)
@@ -44,10 +45,10 @@ struct TripRowView: View {
                             Text("已预约")
                         }
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(DesignTokens.accent)
+                        .foregroundStyle(isPast ? DesignTokens.subduedText : DesignTokens.accent)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
-                        .background(DesignTokens.capsuleBackground, in: Capsule())
+                        .background(reservationBackground, in: Capsule())
                     }
                 }
                 .font(.footnote)
@@ -57,6 +58,28 @@ struct TripRowView: View {
         }
         .padding(15)
         .conciergeCardStyle()
+        .saturation(isPast ? 0.2 : 1)
+        .opacity(isPast ? 0.68 : 1)
         .accessibilityElement(children: .combine)
+    }
+
+    private var iconForeground: Color {
+        isPast ? DesignTokens.subduedText : trip.category.tint
+    }
+
+    private var iconBackground: Color {
+        iconForeground.opacity(isPast ? 0.10 : DesignTokens.iconBackgroundOpacity)
+    }
+
+    private var timeColor: Color {
+        isPast ? DesignTokens.subduedText : DesignTokens.accent
+    }
+
+    private var titleColor: Color {
+        isPast ? DesignTokens.subduedText : .primary
+    }
+
+    private var reservationBackground: Color {
+        isPast ? DesignTokens.subduedText.opacity(0.12) : DesignTokens.capsuleBackground
     }
 }

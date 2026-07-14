@@ -110,7 +110,7 @@ struct MonthCalendarView: View {
                     NavigationLink {
                         TripDetailView(trip: trip)
                     } label: {
-                        TripRowView(trip: trip)
+                        TripRowView(trip: trip, isPast: trip.startAt < Date())
                     }
                     .buttonStyle(.plain)
                 }
